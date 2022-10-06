@@ -10,7 +10,13 @@ export class CreateServiceDto {
   @ApiProperty({ type: String, default: '', required: true })
   @IsNotEmpty()
   description: string;
+
+  @ApiProperty({ type: String, default: '', required: true })
+  @IsNotEmpty()
+  primaryImage: string;
 }
+
+
 
 export class UpdateServiceDto {
   @ApiProperty({ type: String, default: '', required: false })
@@ -20,4 +26,8 @@ export class UpdateServiceDto {
   @ApiProperty({ type: String, default: '', required: false })
   @IsOptional()
   description: string;
+
+  @ApiProperty({ type: String, default: '', required: false })
+  @IsOptional()
+  primaryImage: string;
 }

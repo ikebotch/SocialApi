@@ -1,10 +1,19 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Res,
+} from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto, UpdateUserDto } from './user.dto';
-
+import { Response } from 'express';
 @Controller('users')
 @ApiTags('users')
 export class UserController {
@@ -15,15 +24,23 @@ export class UserController {
 
   @Post()
   async create(@Body() body: CreateUserDto) {
-    console.log('body', body);
     return await this.repository.insert(body);
   }
 
-  @Get(':username')
+  @Get('username/:username')
   getOne(@Param('username') username: string) {
     return this.repository.findOne({
       where: {
         username,
+      },
+    });
+  }
+
+  @Get('email/:email')
+  getByEmail(@Param('email') email: string) {
+    return this.repository.findOne({
+      where: {
+        email,
       },
     });
   }

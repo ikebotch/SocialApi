@@ -12,5 +12,8 @@ import {
   
     @Column()
     description: string;
+
+    @Column()
+    primaryImage: string;
   }
   

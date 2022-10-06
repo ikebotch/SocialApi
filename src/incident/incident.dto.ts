@@ -18,6 +18,10 @@ export class CreateIncidentDto {
   @ApiProperty({ default: '', required: true })
   @IsOptional()
   primaryImage: string;
+  
+  @ApiProperty({ default: '', required: true })
+  @IsOptional()
+  Description: string;
 
   @ApiProperty({ type: String, default: '', required: false })
   @IsOptional()
@@ -50,6 +54,10 @@ export class UpdateIncidentDto {
   @ApiProperty({ type: String, default: '', required: false })
   @IsOptional()
   primaryImage: string;
+
+  @ApiProperty({ type: String, default: '', required: false })
+  @IsOptional()
+  Description: string;
 
   @ApiProperty({ type: String, default: '', required: false })
   @IsOptional()

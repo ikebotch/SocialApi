@@ -6,6 +6,7 @@
     "private": true,
     "license": "UNLICENSED",
     "scripts": {
+        "deploy": "npm run build && docker build . -t sleec && docker tag sleec gcr.io/espace-318807/sleeec && docker push gcr.io/espace-318807/sleeec",
         "prebuild": "rimraf dist",
         "build": "nest build",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

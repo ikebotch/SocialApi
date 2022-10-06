@@ -47,6 +47,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     } as TypeOrmModuleOptions),
   ],
   // controllers: [AppController],
-  // providers: [AppService],
+  // providers: [ {provide: APP_INTERCEPTOR,
+  //   useClass: LoggingInterceptor}],
 })
 export class AppModule {}

@@ -29,6 +29,15 @@ export class SubServiceController {
     });
   }
 
+  @Get('service/:servicename')
+  getServiceName(@Param('servicename') servicename: string) {
+    return this.repository.find({
+      where: {
+        servicename,
+      },
+    });
+  }
+
   @Put(':id')
   update(@Body() body: UpdateSubServiceDto, @Param('id') id: string) {
     return this.repository.update({ id: id }, body);

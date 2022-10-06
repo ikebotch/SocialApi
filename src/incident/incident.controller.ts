@@ -1,10 +1,20 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Res,
+} from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IncidentEntity } from 'src/entities/incident.entity';
 import { Repository } from 'typeorm';
 import { CreateIncidentDto, UpdateIncidentDto } from './incident.dto';
 import { v4 as uuidv4 } from 'uuid';
+import { Response } from 'express';
 
 @Controller('incident')
 @ApiTags('incident')
@@ -20,11 +30,21 @@ export class IncidentController {
     return await this.repository.insert(body);
   }
 
-  @Get(':username')
-  getOne(@Param('username') username: string) {
-    return this.repository.findOne({
+  @Get('username/:username')
+  getOne(@Param('username') username: string, @Res() res: Response) {
+    const a = this.repository.find({
       where: {
         username,
+      },
+    });
+    res.status(HttpStatus.OK).json(a);
+  }
+
+  @Get('subservice/:subservicename')
+  getServiceName(@Param('subservicename') subservicename: string) {
+    return this.repository.find({
+      where: {
+        subservicename,
       },
     });
   }

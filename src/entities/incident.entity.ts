@@ -18,6 +18,9 @@ export class IncidentEntity {
   @Column({ nullable: true })
   primaryVideo: string;
 
+  @Column({ nullable: true })
+  Description: string;
+
   @Column()
   Location: string;
   @Column({
