@@ -12,7 +12,7 @@ import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
-import { CreateUserDto, UpdateUserDto } from './user.dto';
+import { CreateUserDto, UpdateRoledDto, UpdateUserDto } from './user.dto';
 import { Response } from 'express';
 @Controller('users')
 @ApiTags('users')
@@ -45,8 +45,25 @@ export class UserController {
     });
   }
 
+  @Get('loading/:email')
+  getByLoad(@Param('email') email: string) {
+    return this.repository.findOne({
+      where: {
+        email,
+      },
+    });
+  }
+
   @Put(':username')
   update(@Body() body: UpdateUserDto, @Param('username') username: string) {
+    return this.repository.update({ username: username }, body);
+  }
+
+  @Put('role/:username')
+  updateRole(
+    @Body() body: UpdateRoledDto,
+    @Param('username') username: string,
+  ) {
     return this.repository.update({ username: username }, body);
   }
 

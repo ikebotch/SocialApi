@@ -23,6 +23,10 @@ export class IncidentEntity {
 
   @Column()
   Location: string;
+
+  @Column({ nullable: true })
+  assignedOfficer: string;
+
   @Column({
     type: 'date',
     nullable: false,

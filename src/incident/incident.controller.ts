@@ -12,7 +12,11 @@ import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IncidentEntity } from 'src/entities/incident.entity';
 import { Repository } from 'typeorm';
-import { CreateIncidentDto, UpdateIncidentDto } from './incident.dto';
+import {
+  CreateIncidentDto,
+  UpdateIncidentDto,
+  updateOfficerIncidentDto,
+} from './incident.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { Response } from 'express';
 
@@ -30,14 +34,22 @@ export class IncidentController {
     return await this.repository.insert(body);
   }
 
+  @Get(':id')
+  getOne(@Param('id') id: string) {
+    return this.repository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
+
   @Get('username/:username')
-  getOne(@Param('username') username: string, @Res() res: Response) {
-    const a = this.repository.find({
+  getByUsername(@Param('username') username: string) {
+    return this.repository.find({
       where: {
         username,
       },
     });
-    res.status(HttpStatus.OK).json(a);
   }
 
   @Get('subservice/:subservicename')
@@ -49,8 +61,25 @@ export class IncidentController {
     });
   }
 
+  @Get('assignedOfficerTask/:officerUsername')
+  getOfficerTask(@Param('officerUsername') assignedOfficer: string) {
+    return this.repository.find({
+      where: {
+        assignedOfficer,
+      },
+    });
+  }
+
   @Put(':id')
   update(@Body() body: UpdateIncidentDto, @Param('id') id: string) {
+    return this.repository.update({ id: id }, body);
+  }
+
+  @Put('assign/:id')
+  assignOfficer(
+    @Body() body: updateOfficerIncidentDto,
+    @Param('id') id: string,
+  ) {
     return this.repository.update({ id: id }, body);
   }
 

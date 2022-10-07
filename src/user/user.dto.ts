@@ -53,3 +53,9 @@ export class UpdateUserDto {
   @IsNotEmpty()
   isActive: boolean;
 }
+
+export class UpdateRoledDto {
+  @ApiProperty({ type: String, default: '', required: true })
+  @IsNotEmpty()
+  role: string;
+}

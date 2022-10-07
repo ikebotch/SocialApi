@@ -42,6 +42,36 @@ export class CreateIncidentDto {
   repordedOn: Date;
 }
 
+export class assignOfficerIncidentDto {
+  @ApiProperty({ type: String, default: '', required: false })
+  @IsOptional()
+  username: string;
+
+  @ApiProperty({ type: String, default: '', required: false })
+  @IsOptional()
+  assignedOfficer: string;
+
+  @ApiProperty({ type: String, default: '', required: false })
+  @IsOptional()
+  primaryImage: string;
+
+  @ApiProperty({ type: String, default: '', required: false })
+  @IsOptional()
+  Description: string;
+
+  @ApiProperty({ type: String, default: '', required: false })
+  @IsOptional()
+  primaryVideo: string;
+
+  @ApiProperty({ type: String, default: '', required: false })
+  @IsOptional()
+  Location: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  eventDate: Date;
+}
 export class UpdateIncidentDto {
   @ApiProperty({ type: String, default: '', required: false })
   @IsOptional()
@@ -71,4 +101,11 @@ export class UpdateIncidentDto {
   @IsOptional()
   @IsString()
   eventDate: Date;
+}
+
+
+export class updateOfficerIncidentDto {
+  @ApiProperty({ type: String, default: '', required: true })
+  @IsOptional()
+  assignedOfficer: string;
 }
